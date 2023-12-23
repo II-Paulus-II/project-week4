@@ -15,11 +15,9 @@ app.use(cors());
 app.get("/messages", function (request, response) {
   let messages = [];
 
-  // check if the user has provided a query in the URL (/jokes?id=2)
+  // check if the user has provided a query in the URL 
   if (request.query.id) {
-    messages = db
-      .prepare(`SELECT * FROM messages WHERE id=${request.query.id}`)
-      .all();
+    messages = db.prepare(`SELECT * FROM messages WHERE id=${request.query.id}`).all();
   } else {
     // if the URL has no query, get ALL the jokes
     messages = db.prepare("SELECT * FROM messages").all();
@@ -33,12 +31,26 @@ app.post("/messages", function (request, response) {
   console.log(request.body);
   const agentName = request.body.agentName;
   const secretMessage = request.body.secretMessage;
+  const reaction = request.body.reaction;
 
-  const newJoke = db
-    .prepare(`INSERT INTO messages (agentName, secretMessage) VALUES (?, ?)`)
-    .run(agentName, secretMessage);
+  const newMessage = db.prepare(`INSERT INTO messages (agentName, secretMessage, reaction) VALUES (?, ?, ?)`).run(agentName, secretMessage, reaction);
 
-  response.json(newJoke);
+  response.json(newMessage);
+});
+
+app.post("/deletemsg", function (request, response) {
+  console.log(request.body);
+  const deleteMsg = db.prepare(`DELETE FROM messages WHERE id=${request.body.id}`).run();
+  response.json("received delete request");
+});
+
+app.post("/likemsg", function (request, response) {
+  let numLikes = db.prepare(`SELECT likes FROM messages WHERE id=${request.body.id}`).all();
+  console.log("received like message")
+  console.log(numLikes);
+  console.log(numLikes[0].likes);
+  let newLikes = numLikes[0].likes + 1;
+  const incrementLikes = db.prepare(`UPDATE messages SET likes=${newLikes} WHERE id=${request.body.id}`).run();
 });
 
 app.get("/announcements", function (request, response) {
