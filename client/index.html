@@ -3,18 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Our Secret Message Board</title>
+  <title>CIA Message Board</title>
   <link rel="stylesheet" href="./style.css">
+  <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
   <script src="./app.js" type="module" defer></script>
 </head>
 <body>
   <header>
-    <h1>The Secret Place</h1>
+    <h1>The Secret CIA Message Board</h1>
   </header>
   <main>
     <section>
       <div>
-        <h2>Messages to Send to HQ</h2>
+        <h2>Send Message to Langley</h2>
       </div>
       <div>
         <form id="messageForm">
@@ -24,25 +25,25 @@
           <label>Secret Message</label>
           <input name="secretMessage" placeholder="Secret Message" />
           <fieldset class="reactions">
-            <input type="radio" name="reaction" value="angry" checked>
-            <img src="./angry.png" alt="angry">
+            <input type="radio" name="reaction" value="watchful" checked>
+            <img class="sendImg" src="./images/watchful.webp" alt="watchful">
+            <input type="radio" name="reaction" value="angry">
+            <img class="sendImg" src=./images/angry.webp alt="angry">
             <input type="radio" name="reaction" value="threat">
-            <img src=./threat.png alt="threat">
-            <input type="radio" name="reaction" value="bomb">
-            <img src="./bomb.jpg" alt="bomb">
+            <img class="sendImg" src="./images/threat.webp" alt="threat">
           </fieldset>
           <button>Send Message to CIA</button>
         </form>
       </div>
       <div>
-        <h2>Previous Messages</h2>
+        <h2>Messages</h2>
       </div>
       <div id="messageContainer">
       </div> 
     </section>
     <section>
       <div>
-        <h2>Announcements</h2>
+        <h2>Director Messages</h2>
       </div>
       <div id="announcementContainer">
       </div>

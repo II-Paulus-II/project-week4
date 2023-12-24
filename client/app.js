@@ -31,14 +31,31 @@ async function getMessages() {
   msgContainer.innerHTML = "";
   // loop through the messages and print them on the page
   messages.forEach(function (message) {
-    const h3 = document.createElement("h3");
-    const p = document.createElement("p");
-    const img = document.createElement("img");
-    const delButton = document.createElement("button");
-    const likes = document.createElement("p");
-    const likeButton = document.createElement("button");
+  const msgDiv = document.createElement("div");
+    msgDiv.classList.add("msgDiv");
 
-    img.src = ``;
+    const h3 = document.createElement("h3");
+    h3.classList.add("msgH3");
+
+    const p = document.createElement("p");
+    p.classList.add("msgP");
+
+    const img = document.createElement("img");
+    img.classList.add("msgImg");
+
+    const delButton = document.createElement("button");
+    delButton.classList.add("msgDbutton");
+    
+    const likesContainer = document.createElement("div");
+    likesContainer.classList.add("msgLikesCont");
+    
+    const likes = document.createElement("p");
+    likes.classList.add("msgLikes");
+    
+    const likeButton = document.createElement("button");
+    likeButton.classList.add("msgLikeBut");
+
+    img.src = `./images/${message.reaction}.webp`;
     img.alt = message.reaction;
     h3.textContent = message.agentName;
     p.textContent = message.secretMessage;
@@ -64,13 +81,15 @@ async function getMessages() {
       });
     });
     likes.textContent = message.likes;
-
-    msgContainer.appendChild(img);
-    msgContainer.appendChild(h3);
-    msgContainer.appendChild(p);
-    msgContainer.appendChild(delButton);
-    msgContainer.appendChild(likeButton);
-    msgContainer.appendChild(likes);
+    
+    msgContainer.appendChild(msgDiv);
+    msgDiv.appendChild(img);
+    msgDiv.appendChild(h3);
+    msgDiv.appendChild(p);
+    msgDiv.appendChild(delButton);
+    msgDiv.appendChild(likesContainer);
+    likesContainer.appendChild(likes);
+    likesContainer.appendChild(likeButton);
   });
 }
 

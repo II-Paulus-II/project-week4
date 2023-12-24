@@ -12,4 +12,43 @@ main {
 section {
   display: flex;
   flex-direction: column;
+  margin: 1rem;
+}
+
+.sendImg {
+  height: 2rem;
+  width: 2rem;
+}
+
+.msgDiv {
+  border: 3px solid black;
+}
+
+.msgH3 {
+
+}
+
+.msgP {
+  
+}
+
+.msgImg {
+  height: 1.5rem;
+  width: 1.5rem;
+}
+
+.msgDbutton {
+  
+}
+
+.msgLikesCont {
+
+}
+
+.msgLikes {
+  
+}
+
+.msgLikeBut {
+
 }
