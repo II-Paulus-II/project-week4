@@ -47,8 +47,11 @@ async function getMessages() {
   msgContainer.innerHTML = "";
   // loop through the messages and print them on the page
   messages.forEach(function (message) {
-  const msgDiv = document.createElement("div");
+    const msgDiv = document.createElement("div");
     msgDiv.classList.add("msgDiv");
+
+    const headerDiv = document.createElement("div");
+    headerDiv.classList.add("msgHeaderDiv");
 
     const h3 = document.createElement("h3");
     h3.classList.add("msgH3");
@@ -65,6 +68,9 @@ async function getMessages() {
     const likesContainer = document.createElement("div");
     likesContainer.classList.add("msgLikesCont");
     
+    const numLikes = document.createElement("p");
+    numLikes.classList.add("msgNumLikes");
+
     const likes = document.createElement("p");
     likes.classList.add("msgLikes");
     
@@ -86,7 +92,7 @@ async function getMessages() {
     img.alt = message.reaction;
     h3.textContent = message.agentName;
     p.textContent = message.secretMessage;
-    delButton.textContent = "delete";
+    delButton.textContent = "Delete";
     delButton.addEventListener("click", async function() {
       const deleteMsg = await fetch(`${serverLocation}/deletemsg`, {
         method: "POST",
@@ -97,7 +103,7 @@ async function getMessages() {
       });
       console.log("pressed delete");
     });
-    likeButton.textContent = "like";
+    likeButton.textContent = "Dislike Message";
     likeButton.addEventListener("click", async function() {
       const likeMsg = await fetch(`${serverLocation}/likemsg`, {
         method: "POST",
@@ -108,12 +114,15 @@ async function getMessages() {
       });
     });
     likes.textContent = message.likes;
+    numLikes.textContent = "Dislikes";
     msgContainer.appendChild(msgDiv);
-    msgDiv.appendChild(img);
-    msgDiv.appendChild(h3);
+    msgDiv.appendChild(headerDiv);
+    headerDiv.appendChild(img);
+    headerDiv.appendChild(h3);
+    headerDiv.appendChild(delButton);
     msgDiv.appendChild(p);
-    msgDiv.appendChild(delButton);
     msgDiv.appendChild(likesContainer);
+    likesContainer.appendChild(numLikes);
     likesContainer.appendChild(likes);
     likesContainer.appendChild(likeButton);
   });

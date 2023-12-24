@@ -2,17 +2,129 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  color: white;
+}
+
+html {
+  background: #172d77;
+}
+
+body {
+  max-width: 1200px;
+  margin: auto;
+}
+
+header {
+  display: flex;
+  justify-content: center;
+}
+
+header h1 {
+  margin: 1rem 0;
+  font-size: 2.5rem;
+  font-weight: 900;
 }
 
 main {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
 }
 
-section {
+article {
   display: flex;
   flex-direction: column;
-  margin: 1rem;
+}
+
+.directorMsgs {
+  max-width: 1000px;
+  margin: 1rem auto;
+  display: flex;
+  justify-content: center;
+}
+
+.directorMsgs h2 {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 800;
+}
+
+.directorMsgs h3 {
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.directorMsgs p {
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+.agentMsgs {
+  width: 80%;
+  margin: 1rem auto;
+  display: flex;
+  justify-content: center;
+}
+
+.mainFormContainer {
+  margin: 1rem auto;
+  width: 80%;
+  border: 3px solid white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.formTitle {
+  text-align: center;
+  padding: 4px;
+}
+
+.mainForm {
+  margin: 4px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.textInputs {
+  padding: 2px;
+  margin: 2px;
+  text-align: center;
+  font-weight: 500;
+}
+
+.theInputFields {
+  width: 75%;
+  font-size: 1rem;
+}
+
+.reactions {
+  margin: 4px;
+  padding: 4px;
+  display:flex;
+  flex-direction: row;
+  justify-content:center;
+  align-items: center;
+  border: none;
+}
+
+.centerButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.formButton, .msgDbutton, .msgLikeBut {
+  background: black;
+  padding: 4px 8px;
+  margin: 4px;
+}
+
+.previousMessages {
+  width: 100%;
+  margin: 1rem auto;
 }
 
 .sendImg {
@@ -21,34 +133,41 @@ section {
 }
 
 .msgDiv {
-  border: 3px solid black;
+  border: 3px solid white;
+  margin: 3px;
+}
+
+.msgHeaderDiv, .msgLikesCont {
+  margin: 4px;
+  padding: 4px 8px;
+  gap: 1rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.msgH3, .msgP {
+  text-align: center;
 }
 
 .msgH3 {
-
+  font-size: 1.4rem;
 }
 
 .msgP {
-  
+  font-size: 1.2rem;
 }
 
 .msgImg {
-  height: 1.5rem;
-  width: 1.5rem;
+  height: 1.4rem;
+  width: 1.4rem;
 }
 
-.msgDbutton {
-  
+.msgLikes, .msgNumLikes {
+  font-size: 1rem;
 }
 
-.msgLikesCont {
-
-}
-
-.msgLikes {
-  
-}
-
-.msgLikeBut {
-
+.msgNumLikes {
+  text-decoration: underline;
 }

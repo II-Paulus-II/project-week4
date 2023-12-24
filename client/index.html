@@ -13,41 +13,54 @@
     <h1>The Secret CIA Message Board</h1>
   </header>
   <main>
-    <section>
-      <div>
-        <h2>Send Message to Langley</h2>
-      </div>
-      <div>
-        <form id="messageForm">
-          <label>Agent Name</label>
-          <input name="agentName" placeholder="Agents Name" />
-
-          <label>Secret Message</label>
-          <input name="secretMessage" placeholder="Secret Message" />
-          <fieldset class="reactions">
-            <input type="radio" name="reaction" value="watchful" checked>
-            <img class="sendImg" id="watchfulImage" src="./images/watchful.webp" alt="watchful">
-            <input type="radio" name="reaction" value="angry">
-            <img class="sendImg" id="angryImage" src=./images/angry.webp alt="angry">
-            <input type="radio" name="reaction" value="threat">
-            <img class="sendImg" id="threatImage" src="./images/threat.webp" alt="threat">
-          </fieldset>
-          <button>Send Message to CIA</button>
-        </form>
-      </div>
-      <div>
-        <h2>Messages</h2>
-      </div>
-      <div id="messageContainer">
-      </div> 
-    </section>
-    <section>
-      <div>
+    <article class="directorMsgs">
+      <section>
         <h2>Director Messages</h2>
-      </div>
-      <div id="announcementContainer">
-      </div>
-    </section>
+      </section>
+      <section id="announcementContainer">
+      </section>
+    </article>
+    <article class="agentMsgs">
+      <section class="mainFormContainer">
+        <div class ="formTitle">
+          <h2>Send Message to Langley</h2>
+        </div>
+        <div class="mainForm">
+          <form id="messageForm">
+            <div class="textInputs">
+              <label>Agent</label>
+            </div>
+            <div class="textInputs">
+              <input class="theInputFields" name="agentName" placeholder="Codename" />
+            </div>
+            <div class="textInputs">
+              <label>Message</label>
+            </div>
+            <div class="textInputs">
+              <input class="theInputFields" name="secretMessage" placeholder="Secret Message" />
+            </div>
+            <fieldset class="reactions">
+              <input type="radio" name="reaction" value="watchful" checked>
+              <img class="sendImg" id="watchfulImage" src="./images/watchful.webp" alt="watchful">
+              <input type="radio" name="reaction" value="angry">
+              <img class="sendImg" id="angryImage" src=./images/angry.webp alt="angry">
+              <input type="radio" name="reaction" value="threat">
+              <img class="sendImg" id="threatImage" src="./images/threat.webp" alt="threat">
+            </fieldset>
+            <div class="centerButton">
+              <button class="formButton">Send Message to CIA</button>
+            </div>
+          </form>
+        </div>
+      </section>
+      <section class="previousMessages">
+        <div>
+          <h2>Messages</h2>
+        </div>
+        <div id="messageContainer">
+        </div>
+      </section> 
+    </article>
   </main>
 </body>
 </html>
