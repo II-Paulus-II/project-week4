@@ -39,15 +39,15 @@ app.post("/messages", function (request, response) {
 });
 
 app.post("/deletemsg", function (request, response) {
-  console.log(request.body);
   const deleteMsg = db.prepare(`DELETE FROM messages WHERE id=${request.body.id}`).run();
-  response.json("received delete request");
+  response.status(200).send("Message Successfully Deleted");
 });
 
 app.post("/likemsg", function (request, response) {
   let numLikes = db.prepare(`SELECT likes FROM messages WHERE id=${request.body.id}`).all();
   let newLikes = numLikes[0].likes + 1;
   const incrementLikes = db.prepare(`UPDATE messages SET likes=${newLikes} WHERE id=${request.body.id}`).run();
+  response.status(200).send("Message Successfully Liked");
 });
 
 app.get("/announcements", function (request, response) {

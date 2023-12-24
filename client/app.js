@@ -35,7 +35,7 @@ form.addEventListener("submit", async function (event) {
     body: JSON.stringify(formValues),
   });
   const json = await response.json();
-
+  getMessages();
   console.log(json);
 });
 
@@ -103,6 +103,7 @@ async function getMessages() {
       });
       console.log("pressed delete");
     });
+    
     likeButton.textContent = "Dislike Message";
     likeButton.addEventListener("click", async function() {
       const likeMsg = await fetch(`${serverLocation}/likemsg`, {
@@ -148,6 +149,9 @@ async function getAnnouncements() {
 }
 
 /* ----- Get all messages and announcements ----- */ 
+
+getAnnouncements();
+getMessages();
 
 setInterval(() => {
   getAnnouncements();
