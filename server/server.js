@@ -2,8 +2,6 @@ import express from "express";
 import cors from "cors";
 import Database from "better-sqlite3";
 
-console.log("hello the imports worked");
-
 const db = new Database("database.db");
 
 const app = express();
@@ -32,10 +30,12 @@ app.post("/messages", function (request, response) {
   const agentName = request.body.agentName;
   const secretMessage = request.body.secretMessage;
   const reaction = request.body.reaction;
-
-  const newMessage = db.prepare(`INSERT INTO messages (agentName, secretMessage, reaction, likes) VALUES (?, ?, ?, ?)`).run(agentName, secretMessage, reaction, 0);
-
-  response.json(newMessage);
+  if(agentName=='' || secretMessage=='') {
+    response.json("stop sending empty messages to the server")
+  } else {
+    const newMessage = db.prepare(`INSERT INTO messages (agentName, secretMessage, reaction, likes) VALUES (?, ?, ?, ?)`).run(agentName, secretMessage, reaction, 0);
+    response.json(newMessage);
+  }
 });
 
 app.post("/deletemsg", function (request, response) {
@@ -46,9 +46,6 @@ app.post("/deletemsg", function (request, response) {
 
 app.post("/likemsg", function (request, response) {
   let numLikes = db.prepare(`SELECT likes FROM messages WHERE id=${request.body.id}`).all();
-  console.log("received like message")
-  console.log(numLikes);
-  console.log(numLikes[0].likes);
   let newLikes = numLikes[0].likes + 1;
   const incrementLikes = db.prepare(`UPDATE messages SET likes=${newLikes} WHERE id=${request.body.id}`).run();
 });
@@ -59,5 +56,5 @@ app.get("/announcements", function (request, response) {
 });
 
 app.listen(8080, () => {
-  console.log("my server is running");
+  console.log("CIA server is running");
 });
