@@ -1,15 +1,20 @@
-console.log("me pge werk");
+console.log("CIA Message Board Live");
 
 /* ----- Get Server Host ----- */ 
 
-console.log(window.location.hostname);
 let serverLocation;
 
 if(window.location.hostname === "localhost") {
   serverLocation = "http://localhost:8080"
 } else {
-  serverLocation = "https://cia-message-board.onrender.com";
+  serverLocation = "https://cia-message-board-backend.onrender.com";
 }
+
+/* ----- Trusting Vite Build with your Website yes guten tag ----- */
+
+const watchfulImage = document.getElementById("watchfulImage");
+const angryImage = document.getElementById("angryImage");
+const threatImage = document.getElementById("threatImage");
 
 /* ----- MESSAGES ----- */
 const form = document.getElementById("messageForm");
@@ -65,8 +70,19 @@ async function getMessages() {
     
     const likeButton = document.createElement("button");
     likeButton.classList.add("msgLikeBut");
-
-    img.src = `./images/${message.reaction}.webp`;
+   
+    //Horrific code due to 100% trusting vite to be cleaver with images
+    switch(message.reaction) {
+      case "watchful":
+        img.src = watchfulImage.src;
+        break;
+      case "angry":
+        img.src = angryImage.src;
+        break;
+      case "threat":
+        img.src = threatImage.src;
+        break;
+    }
     img.alt = message.reaction;
     h3.textContent = message.agentName;
     p.textContent = message.secretMessage;
@@ -92,7 +108,6 @@ async function getMessages() {
       });
     });
     likes.textContent = message.likes;
-    
     msgContainer.appendChild(msgDiv);
     msgDiv.appendChild(img);
     msgDiv.appendChild(h3);
@@ -128,4 +143,4 @@ async function getAnnouncements() {
 setInterval(() => {
   getAnnouncements();
   getMessages();
-}, 1000);
+}, 2500);

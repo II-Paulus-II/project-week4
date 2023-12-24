@@ -33,7 +33,7 @@ app.post("/messages", function (request, response) {
   const secretMessage = request.body.secretMessage;
   const reaction = request.body.reaction;
 
-  const newMessage = db.prepare(`INSERT INTO messages (agentName, secretMessage, reaction) VALUES (?, ?, ?)`).run(agentName, secretMessage, reaction);
+  const newMessage = db.prepare(`INSERT INTO messages (agentName, secretMessage, reaction, likes) VALUES (?, ?, ?, ?)`).run(agentName, secretMessage, reaction, 0);
 
   response.json(newMessage);
 });
