@@ -1,5 +1,16 @@
 console.log("me pge werk");
 
+/* ----- Get Server Host ----- */ 
+
+console.log(window.location.hostname);
+let serverLocation;
+
+if(window.location.hostname === "localhost") {
+  serverLocation = "http://localhost:8080"
+} else {
+  serverLocation = "https://cia-message-board.onrender.com";
+}
+
 /* ----- MESSAGES ----- */
 const form = document.getElementById("messageForm");
 const msgContainer = document.getElementById("messageContainer");
@@ -11,7 +22,7 @@ form.addEventListener("submit", async function (event) {
   const formValues = Object.fromEntries(formData);
 
   // send the joke to the API
-  const response = await fetch("http://localhost:8080/messages", {
+  const response = await fetch(`${serverLocation}/messages`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -25,7 +36,7 @@ form.addEventListener("submit", async function (event) {
 
 async function getMessages() {
   // get the jokes from our Database via our API
-  const response = await fetch("http://localhost:8080/messages");
+  const response = await fetch(`${serverLocation}/messages`);
   const messages = await response.json();
   //It is Christmas Time I would have figured better way with more time to only print the new messages
   msgContainer.innerHTML = "";
@@ -61,7 +72,7 @@ async function getMessages() {
     p.textContent = message.secretMessage;
     delButton.textContent = "delete";
     delButton.addEventListener("click", async function() {
-      const deleteMsg = await fetch("http://localhost:8080/deletemsg", {
+      const deleteMsg = await fetch(`${serverLocation}/deletemsg`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -72,7 +83,7 @@ async function getMessages() {
     });
     likeButton.textContent = "like";
     likeButton.addEventListener("click", async function() {
-      const likeMsg = await fetch("http://localhost:8080/likemsg", {
+      const likeMsg = await fetch(`${serverLocation}/likemsg`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -98,7 +109,7 @@ async function getMessages() {
 const announcementsContainer = document.getElementById("announcementContainer");
 
 async function getAnnouncements() {
-  const response = await fetch("http://localhost:8080/announcements");
+  const response = await fetch(`${serverLocation}/announcements`);
   const announcements = await response.json();
   //clear container lmao worst solution ever 
   announcementContainer.innerHTML = ""; 
