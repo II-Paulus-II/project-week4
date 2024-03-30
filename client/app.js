@@ -100,7 +100,7 @@ async function getMessages() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(message)
-      }).then(getMessages());
+      });
     });
     
     likeButton.textContent = "Dislike Message";
@@ -111,7 +111,7 @@ async function getMessages() {
           "Content-Type": "application/json"
         },
         body: JSON.stringify(message)
-      }).then(getMessages());
+      });
     });
     likes.textContent = message.likes;
     numLikes.textContent = "Dislikes";

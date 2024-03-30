@@ -18,7 +18,7 @@ const rootMessage = {
 
 /* ----- Endpoints ----- */
 app.get("/", (req,res) => {
-  response.json(rootMessage);
+  res.json(rootMessage);
 });
 
 app.get("/treadstone_messages", function (request, response) {
@@ -32,7 +32,6 @@ app.get("/treadstone_messages", function (request, response) {
 });
 
 app.post("/treadstone_messages", function (request, response) {
-  console.log(request.body);
   const agentName = request.body.agentName;
   const secretMessage = request.body.secretMessage;
   const reaction = request.body.reaction;

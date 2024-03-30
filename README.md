@@ -25,9 +25,9 @@ Here is an example!
 
 ### User Stories
 
-    🐿️ As a user, I want to visit the website and read the information on my phone or computer  
-    🐿️ As a user, I want to be able to leave a message in the guestbook  
-    🐿️ As a user, I want to be able to see all of the messages that have been left in the guestbook  
+🐿️ As a user, I want to visit the website and read the information on my phone or computer  
+🐿️ As a user, I want to be able to leave a message in the guestbook  
+🐿️ As a user, I want to be able to see all of the messages that have been left in the guestbook  
 
 ### Requirements
 
@@ -42,7 +42,7 @@ Here is an example!
   * Create an API GET route to retrieve all the messages from the database
 
   * Fetch the messages from your API in the browser and display them on the page.
-  
+
 ### Stretch Goals
 
   * Add a delete button to each message, that sends a request to the server to delete the message
