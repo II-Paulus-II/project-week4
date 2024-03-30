@@ -15,8 +15,15 @@ body {
 }
 
 header {
+  margin: 1rem;
   display: flex;
+  flex-direction: row;
   justify-content: center;
+  gap: 2rem;
+}
+
+.headerImage {
+  width: 100px;
 }
 
 header h1 {
@@ -126,6 +133,10 @@ article {
 .previousMessages {
   width: 100%;
   margin: 1rem auto;
+}
+
+.prevMessagesTitle {
+  text-align: center;
 }
 
 .sendImg {

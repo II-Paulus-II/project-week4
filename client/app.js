@@ -5,9 +5,9 @@ console.log("CIA Message Board Live");
 let serverLocation;
 
 if(window.location.hostname === "localhost") {
-  serverLocation = "http://localhost:8080"
+  serverLocation = "http://localhost:9000"
 } else {
-  serverLocation = "https://cia-message-board-backend.onrender.com";
+  serverLocation = "https://api.paulus.casa";
 }
 
 /* ----- Trusting Vite Build with your Website yes guten tag ----- */
@@ -27,8 +27,8 @@ form.addEventListener("submit", async function (event) {
   const formValues = Object.fromEntries(formData);
   console.log(formValues);
 
-  // send the joke to the API
-  const response = await fetch(`${serverLocation}/messages`, {
+  // send the message to the API
+  const response = await fetch(`${serverLocation}/treadstone_messages`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -42,7 +42,7 @@ form.addEventListener("submit", async function (event) {
 
 async function getMessages() {
   // get the jokes from our Database via our API
-  const response = await fetch(`${serverLocation}/messages`);
+  const response = await fetch(`${serverLocation}/treadstone_messages`);
   const messages = await response.json();
   //It is Christmas Time I would have figured better way with more time to only print the new messages
   msgContainer.innerHTML = "";
@@ -95,7 +95,7 @@ async function getMessages() {
     p.textContent = message.secretMessage;
     delButton.textContent = "Delete";
     delButton.addEventListener("click", async function() {
-      const deleteMsg = await fetch(`${serverLocation}/deletemsg`, {
+      const deleteMsg = await fetch(`${serverLocation}/treadstone_deletemsg`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -107,7 +107,7 @@ async function getMessages() {
     
     likeButton.textContent = "Dislike Message";
     likeButton.addEventListener("click", async function() {
-      const likeMsg = await fetch(`${serverLocation}/likemsg`, {
+      const likeMsg = await fetch(`${serverLocation}/treadstone_likemsg`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -135,7 +135,7 @@ async function getMessages() {
 const announcementsContainer = document.getElementById("announcementContainer");
 
 async function getAnnouncements() {
-  const response = await fetch(`${serverLocation}/announcements`);
+  const response = await fetch(`${serverLocation}/treadstone_announcements`);
   const announcements = await response.json();
   //clear container lmao worst solution ever 
   announcementContainer.innerHTML = ""; 
