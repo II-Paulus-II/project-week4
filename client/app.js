@@ -2,13 +2,13 @@ console.log("CIA Message Board Live");
 
 /* ----- Get Server Host ----- */ 
 
-let serverLocation;
+let serverLocation  = "https://api.paulus.casa";
 
-if(window.location.hostname === "localhost") {
-  serverLocation = "http://localhost:9000"
-} else {
-  serverLocation = "https://api.paulus.casa";
-}
+// if(window.location.hostname === "localhost") {
+//   serverLocation = "http://localhost:9000"
+// } else {
+//   serverLocation = "https://api.paulus.casa";
+// }
 
 /* ----- Trusting Vite Build with your Website yes guten tag ----- */
 
@@ -34,8 +34,6 @@ form.addEventListener("submit", async function (event) {
     },
     body: JSON.stringify(formValues),
   });
-  const json = await response.json();
-  getMessages();
 });
 
 async function getMessages() {
@@ -154,4 +152,4 @@ getMessages();
 setInterval(() => {
   getAnnouncements();
   getMessages();
-}, 2500);
+}, 1000);
