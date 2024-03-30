@@ -37,7 +37,6 @@ form.addEventListener("submit", async function (event) {
   });
   const json = await response.json();
   getMessages();
-  console.log(json);
 });
 
 async function getMessages() {
@@ -101,8 +100,7 @@ async function getMessages() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(message)
-      });
-      console.log("pressed delete");
+      }).then(getMessages());
     });
     
     likeButton.textContent = "Dislike Message";
@@ -113,7 +111,7 @@ async function getMessages() {
           "Content-Type": "application/json"
         },
         body: JSON.stringify(message)
-      });
+      }).then(getMessages());
     });
     likes.textContent = message.likes;
     numLikes.textContent = "Dislikes";
