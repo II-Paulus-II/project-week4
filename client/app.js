@@ -138,12 +138,12 @@ async function getAnnouncements() {
   const response = await fetch(`${serverLocation}/treadstone_announcements`);
   const announcements = await response.json();
   //clear container lmao worst solution ever 
-  announcementContainer.innerHTML = ""; 
+  announcementsContainer.innerHTML = ""; 
   announcements.forEach(function (data) {
     const h3 = document.createElement("h3");
     const p = document.createElement("p");
-    h3.textContent = data.lineOne;
-    p.textContent = data.lineTwo;
+    h3.textContent = data.officer;
+    p.textContent = data.message;
     announcementsContainer.appendChild(h3);
     announcementsContainer.appendChild(p);
   });
