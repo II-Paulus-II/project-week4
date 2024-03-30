@@ -25,7 +25,6 @@ form.addEventListener("submit", async function (event) {
   // get the form data
   const formData = new FormData(form);
   const formValues = Object.fromEntries(formData);
-  console.log(formValues);
 
   // send the message to the API
   const response = await fetch(`${serverLocation}/treadstone_messages`, {
