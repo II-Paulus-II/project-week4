@@ -1,31 +1,37 @@
+/* ----- Third Party Imports ----- */
 import express from "express";
 import cors from "cors";
 import Database from "better-sqlite3";
 
+/* ----- Server Setup ----- */
 const db = new Database("database.db");
-
 const app = express();
 app.use(express.json());
 app.use(cors());
 
+/* ----- Root Message ----- */
+const rootMessage = {
+  from: "Darth Vader",
+  to: "You",
+  message: "I am your Father"
+}
+
 /* ----- Endpoints ----- */
+app.get("/", (req,res) => {
+  response.json(rootMessage);
+});
 
-app.get("/messages", function (request, response) {
+app.get("/treadstone_messages", function (request, response) {
   let messages = [];
-
-  // check if the user has provided a query in the URL 
   if (request.query.id) {
-    messages = db.prepare(`SELECT * FROM messages WHERE id=${request.query.id}`).all();
+    messages = db.prepare(`SELECT * FROM treadstone_agent_messages WHERE id=${request.query.id}`).all();
   } else {
-    // if the URL has no query, get ALL the jokes
-    messages = db.prepare("SELECT * FROM messages").all();
+    messages = db.prepare("SELECT * FROM treadstone_agent_messages").all();
   }
-
-  // send either the array of all the jokes, or just the one we queried for
   response.json(messages);
 });
 
-app.post("/messages", function (request, response) {
+app.post("/treadstone_messages", function (request, response) {
   console.log(request.body);
   const agentName = request.body.agentName;
   const secretMessage = request.body.secretMessage;
@@ -33,28 +39,29 @@ app.post("/messages", function (request, response) {
   if(agentName=='' || secretMessage=='') {
     response.json("stop sending empty messages to the server")
   } else {
-    const newMessage = db.prepare(`INSERT INTO messages (agentName, secretMessage, reaction, likes) VALUES (?, ?, ?, ?)`).run(agentName, secretMessage, reaction, 0);
+    const newMessage = db.prepare(`INSERT INTO treadstone_agent_messages (agentName, secretMessage, reaction, likes) VALUES (?, ?, ?, ?)`).run(agentName, secretMessage, reaction, 0);
     response.json(newMessage);
   }
 });
 
-app.post("/deletemsg", function (request, response) {
-  const deleteMsg = db.prepare(`DELETE FROM messages WHERE id=${request.body.id}`).run();
+app.post("/treadstone_deletemsg", function (request, response) {
+  const deleteMsg = db.prepare(`DELETE FROM treadstone_agent_messages WHERE id=${request.body.id}`).run();
   response.status(200).send("Message Successfully Deleted");
 });
 
-app.post("/likemsg", function (request, response) {
-  let numLikes = db.prepare(`SELECT likes FROM messages WHERE id=${request.body.id}`).all();
+app.post("/treadstone_likemsg", function (request, response) {
+  let numLikes = db.prepare(`SELECT likes FROM treadstone_agent_messages WHERE id=${request.body.id}`).all();
   let newLikes = numLikes[0].likes + 1;
-  const incrementLikes = db.prepare(`UPDATE messages SET likes=${newLikes} WHERE id=${request.body.id}`).run();
+  const incrementLikes = db.prepare(`UPDATE treadstone_agent_messages SET likes=${newLikes} WHERE id=${request.body.id}`).run();
   response.status(200).send("Message Successfully Liked");
 });
 
-app.get("/announcements", function (request, response) {
-  let announcements = db.prepare("SELECT * FROM announcements").all();
+app.get("/treadstone_announcements", function (request, response) {
+  let announcements = db.prepare("SELECT * FROM treadstone_supervisor_message").all();
   response.json(announcements);
 });
 
-app.listen(8080, () => {
+/* ----- Run Server ----- */
+app.listen(9000, () => {
   console.log("CIA server is running");
 });
